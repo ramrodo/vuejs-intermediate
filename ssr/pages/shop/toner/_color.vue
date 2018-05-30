@@ -1,12 +1,10 @@
 <template>
   <div>
     <section class="hero">
-      <!-- TODO set bg color depending on the toner -->
-      <div class="hero-body">
+      <div class="hero-body" :style="{backgroundColor: color}">
         <div class="container">
           <h1 class="title">
-            <!-- TODO set current color -->
-            Black toner
+            {{color}} toner
           </h1>
           <a class="button is-warning">
             <!-- TODO add to cart -->
@@ -16,8 +14,7 @@
       </div>
     </section>
     <div class="container">
-      <!-- TODO set image -->
-      <img src="~/assets/black-toner.jpg">
+      <img :src="image">
       <p>Lorem ipsum dolor sit amet.</p>
     </div>
 
@@ -25,7 +22,19 @@
 </template>
 
 <script>
+const validColors = ['black', 'magenta', 'cyan', 'yellow']
 export default {
+  validate (context) {
+    return validColors.some(color => color === context.params.color)
+  },
+  computed: {
+    color () {
+      return this.$route.params.color
+    },
+    image () {
+      return require(`~/assets/${this.color}-toner.jpg`)
+    }
+  },
   head() {
     return {
       title: `1D printer - Toner ${this.currentToner}`

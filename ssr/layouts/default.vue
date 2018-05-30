@@ -1,11 +1,15 @@
 <template>
   <div>
+    <nav-bar />
     <nuxt/>
   </div>
 </template>
 
 <script>
-// TODO add nav bar everywhere
+import NavBar from '~/components/NavBar'
 export default {
+  components: {
+    NavBar
+  }
 }
 </script>
