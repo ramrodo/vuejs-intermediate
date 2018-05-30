@@ -6,8 +6,7 @@
           <h1 class="title">
             {{color}} toner
           </h1>
-          <a class="button is-warning">
-            <!-- TODO add to cart -->
+          <a @click="addItemToCart(color)" class="button is-warning">
             Add to cart
           </a>
         </div>
@@ -22,6 +21,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 const validColors = ['black', 'magenta', 'cyan', 'yellow']
 export default {
   validate (context) {
@@ -34,6 +35,11 @@ export default {
     image () {
       return require(`~/assets/${this.color}-toner.jpg`)
     }
+  },
+  methods: {
+    ...mapActions('cart',{
+      addItemToCart: 'addItemToCart'
+    })
   },
   head() {
     return {
