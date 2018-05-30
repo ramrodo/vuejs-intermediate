@@ -5,6 +5,10 @@ export const state = () => {
 };
 
 export const actions = {
+  getLocalStorageCart: ({ commit }) => {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    commit("setCart", cart);
+  },
   addItemToCart: ({ commit }, value) => {
     commit("addItem", value);
   },
@@ -16,6 +20,7 @@ export const actions = {
 export const mutations = {
   addItem: (state, value) => {
     state.items.push(value);
+    localStorage.setItem("cart", JSON.stringify(state.items));
   },
   removeItem: (state, value) => {
     const itemIndex = state.items.indexOf(value);
@@ -23,6 +28,10 @@ export const mutations = {
       // remove the element
       state.items.splice(itemIndex, 1);
     }
+    localStorage.setItem("cart", JSON.stringify(state.items));
+  },
+  setCart: (state, value) => {
+    state.items = value;
   }
 };
 
