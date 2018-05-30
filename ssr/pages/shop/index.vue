@@ -40,14 +40,34 @@
         </div>
       </div>
 
-      <!-- TODO add list of items in cart -->
+      <ul>
+        <li v-for="(value, key) in groupedItems"
+          :key="key">
+          <div @click="removeItem(key)" class="button">-</div>
+          <div @click="addItem(key)" class="button">+</div>
+          <span>{{key}} x {{value}}</span>
+        </li>
+      </ul>
 
     </div>
   </section>
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
+
 export default {
+  computed: {
+    ...mapGetters('cart', {
+      groupedItems: 'groupedItems'
+    })
+  },
+  methods: {
+    ...mapActions('cart', {
+      addItem: 'addItemToCart',
+      removeItem: 'removeItemFromCart'
+    })
+  },
   head() {
     return {
       title: '1D printer - shop'

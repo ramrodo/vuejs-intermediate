@@ -17,7 +17,7 @@
         <div class="navbar-item">
           <nuxt-link to="/shop">
             <img src="~/assets/cart-icon.png">
-            <span>0 items</span>
+            <span>{{numItems}} items</span>
           </nuxt-link>
         </div>
       </div>
@@ -25,3 +25,14 @@
 
   </nav>
 </template>
+
+<script>
+import {mapGetters} from 'vuex'
+export default {
+  computed: {
+    ...mapGetters('cart',{
+      numItems: 'numItems'
+    })
+  }
+}
+</script>
