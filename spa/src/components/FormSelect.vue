@@ -3,6 +3,7 @@
     <select @change="onSelect">
       <option v-for="(option, index) in options"
         :key="index"
+        :selected="value===option.value"
         :value="option.value">
         {{option.label}}
       </option>
@@ -13,6 +14,9 @@
 <script>
 export default {
   props: {
+    value: {
+      required: true
+    },
     options: { // needs {label, value}
       type: Array,
       default: () => []
@@ -21,8 +25,7 @@ export default {
 
   methods: {
     onSelect (e) {
-      console.log('selected option', e.target.value)
-      // TODO create custom v-model
+      this.$emit('input', e.target.value)
     }
   }
 }
