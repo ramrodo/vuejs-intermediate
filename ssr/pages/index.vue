@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <h1>Hello world!</h1>
-  </div>
+  <product-hero/>
 </template>
 
 <script>
+import ProductHero from '~/components/ProductHero'
 // pages
 // -- home
 // -- buy
@@ -16,9 +15,12 @@
 //   ||-- yellow
 
 export default {
+  components: {
+    ProductHero
+  },
   head() {
     return {
-      title: '1D printer'
+      title: '1D printer Hi!'
     }
   }
 }

@@ -42,12 +42,25 @@
 
       <!-- TODO add list of items in cart -->
 
+      <ul>
+        <li v-for="(item, index) in groupedItems" :key="index">
+          <div class="button">-</div>
+          <div class="button">+</div>
+          {{key}} x {{item}}
+        </li>
+      </ul>
+
     </div>
   </section>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
+  computed: {
+    ...mapGetters('cart', ['groupedItems']),
+  },
   head() {
     return {
       title: '1D printer - shop'
